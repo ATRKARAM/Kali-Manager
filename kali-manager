@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# Check if required packages are installed
+if ! command -v toilet &> /dev/null || ! command -v lolcat &> /dev/null; then
+    echo "Some packages are not installed. Installing them now..."
+    sudo apt update && sudo apt install -y toilet lolcat
+fi
+
+clear
+
+# Display the title
+toilet -f big "Kali Manager" | lolcat
+echo
+echo "Tool created by Karam github account ATRKARAM" | lolcat
+echo "v0.0.1" | lolcat
+echo "Welcome $USER to the Kali Manager" | lolcat
+echo "Here you can manage Kali Linux" | lolcat
+echo
+
+# Display menu options
+while true; do
+    echo "Select an option:" | lolcat
+    echo "1. Upgrade Kali Linux" | lolcat
+    echo "2. Update Kali Linux" | lolcat
+    echo "3. Install a Package" | lolcat
+    echo "4. Auto Remove Packages (apt)" | lolcat
+    echo "5. Show disk usage" | lolcat
+    echo "6. Exit" | lolcat
+    echo "*. Maybe Later a lot of functions will be added" | lolcat
+    echo
+    read -p "Enter your choice (1-6): " choice
+
+    # Checking if choice are correct and execute a choice
+    case $choice in
+        1)
+            echo "Upgrading Kali Linux..." | lolcat
+            sudo apt update && sudo apt upgrade -y
+            echo "Upgrade complete!" | lolcat
+            ;;
+        2)
+            echo "Updating Kali Linux..." | lolcat
+            sudo apt update
+            echo "Update complete!" | lolcat
+            ;;
+        3)
+            echo "Installing a package..." | lolcat
+            read -p "Enter a package to install: " package
+            sudo apt install $package
+            echo "Install a Package complete!" | lolcat
+            ;;
+        4)
+            echo "Auto Removing Packages (apt)..." | lolcat
+            sudo apt autoremove
+            echo "Auto Remove Packages (apt) complete!" | lolcat
+            ;;
+        5)
+            echo "Showing disk usage..." | lolcat
+            df -h
+            ;;
+        6)
+            echo "Exiting Kali Manager. Goodbye!" | lolcat
+            break
+            ;;
+        *)
+            echo "Invalid choice. Please enter a number between 1 and 5." | lolcat
+            ;;
+    esac
+
+    echo
+    read -p "Press Enter to return to the menu..." temp
+    clear
+    toilet -f big "Kali Manager" | lolcat
+done
