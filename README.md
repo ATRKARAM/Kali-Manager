@@ -1,4 +1,4 @@
-*Warning it's only for kali it might for other linux distro but is NOT RECOMMENDED*
+*Warning it's only for kali it might work for other linux distro but is NOT RECOMMENDED*
 
 *Also thats my first tool ever!*
 
