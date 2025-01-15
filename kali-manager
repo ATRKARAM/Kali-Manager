@@ -12,7 +12,7 @@ clear
 toilet -f big "Kali Manager" | lolcat
 echo
 echo "Tool created by Karam github account ATRKARAM" | lolcat
-echo "v0.0.1" | lolcat
+echo "v0.0.2" | lolcat
 echo "Welcome $USER to the Kali Manager" | lolcat
 echo "Here you can manage Kali Linux" | lolcat
 echo
@@ -22,13 +22,17 @@ while true; do
     echo "Select an option:" | lolcat
     echo "1. Upgrade Kali Linux" | lolcat
     echo "2. Update Kali Linux" | lolcat
-    echo "3. Install a Package" | lolcat
+    echo "3. Install a Package/Packages" | lolcat
     echo "4. Auto Remove Packages (apt)" | lolcat
     echo "5. Show disk usage" | lolcat
-    echo "6. Exit" | lolcat
+    echo "6. Start Network Manager" | lolcat
+    echo "7. Stop Network Manager" | lolcat
+    echo "8. Set a wireless adapter on monitor mode" | lolcat
+    echo "9. Set a wireless adapter on managed mode" | lolcat
+    echo "10. Exit" | lolcat
     echo "*. Maybe Later a lot of functions will be added" | lolcat
     echo
-    read -p "Enter your choice (1-6): " choice
+    read -p "Enter your choice (1-10): " choice
 
     # Checking if choice are correct and execute a choice
     case $choice in
@@ -58,11 +62,34 @@ while true; do
             df -h
             ;;
         6)
+            echo "Starting NetworkManager..." | lolcat
+            sudo service NetworkManager start
+            echo "Start NetworkManager complete!" | lolcat
+            ;;
+        7)
+            echo "Stoping NetworkManager..." | lolcat
+            sudo service NetworkManager stop
+            echo "Stop NetworkManager complete!" | lolcat
+            ;;
+        8)
+            echo "Set a wireless adapter on monitor mode..." | lolcat
+            read -p "Choose a wireless adapter: " wlan
+            sudo airmon-ng check kill
+            sudo airmon-ng start $wlan
+            echo "Set a wireless adapter on monitor mode complete!" | lolcat
+            ;;
+        9)
+            echo "Set a wireless adapter on managed mode..." | lolcat
+            read -p "Choose a wireless adapter: " wlan
+            sudo ifconfig $wlan down && airmon-ng stop $wlan && ifconfig $wlan
+            echo "Set a wireless adapter on managed mode complete!" | lolcat
+            ;;
+        10)
             echo "Exiting Kali Manager. Goodbye!" | lolcat
             break
             ;;
         *)
-            echo "Invalid choice. Please enter a number between 1 and 5." | lolcat
+            echo "Invalid choice. Please enter a number between 1 and 10." | lolcat
             ;;
     esac
 
