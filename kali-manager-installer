@@ -8,3 +8,5 @@ fi
 
 # Copys Kali Manager to /usr/bin so it will be used like normal commands
 cp kali-manager /usr/bin
+
+echo "Kali Manager installed correctly now in the terminal type 'kali-manager' to execute it!"
