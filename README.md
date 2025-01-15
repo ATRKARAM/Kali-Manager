@@ -6,7 +6,7 @@
 
 *Installing help is under the image!*
 
-![Screenshot_20250115_173640](https://github.com/user-attachments/assets/ac1316b1-37fd-4853-a92b-95f508a904aa)
+![Screenshot_20250115_181202](https://github.com/user-attachments/assets/90c56a5e-7988-4dad-9e4c-532c11c159f6)
 
 *Installing*
 ```
