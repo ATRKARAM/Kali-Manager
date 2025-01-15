@@ -10,7 +10,7 @@
 
 *Installing*
 ```
-git clone https://github.com/ATRKARAM/Kali-Manager.git
+git clone https://github.com/Unknowner334/Kali-Manager.git
 cd Kali-Manager
 bash kali-manager
 ```
