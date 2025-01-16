@@ -159,12 +159,12 @@ while true; do
 ██║  ██╗██║  ██║███████╗██║    ██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║╚██████╔╝███████╗██║  ██║
 ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝" | lolcat
     echo
-    echo -e "\e[34mTool created by \e[31mUnknowner\e[34m github account \e[31mUnknowner334\e[0m"
-    echo -e "\e[34mv0.0.1\e[0m"
+    echo -e "\e[36mTool created by \e[31mUnknowner\e[36m github account \e[31mUnknowner334\e[0m"
+    echo -e "Tools Version: \e[32mv$tool_version\e[0m"
     if [[ $USER == "root" ]]; then
     echo -e "\e[33mWelcome \e[31m$USER\e[33m to the Kali Manager\e[0m"
     else
-    echo -e "\e[33mWelcome \e[34m$USER\e[33m to the Kali Manager\e[0m"
+    echo -e "\e[33mWelcome \e[36m$USER\e[33m to the Kali Manager\e[0m"
     fi
     echo -e "\e[33mHere you can manage Kali Linux\e[0m"
     echo
