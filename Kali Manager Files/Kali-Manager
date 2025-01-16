@@ -1,0 +1,163 @@
+#!/bin/bash
+
+# Check if required packages are installed
+if ! command -v lolcat &> /dev/null; ! command -v cmatrix &> /dev/null; then
+    echo "Some packages are not installed. Installing them now..."
+    sudo apt update && sudo apt install -y lolcat cmatrix
+fi
+
+clear
+
+# Some Variables
+tool_version="0.0.1"
+
+# Function to check for updates
+check_for_updates() {
+    local repo_url="https://api.github.com/repos/Unknowner334/KaliManager/releases/latest"
+
+    # Fetch the latest release information from GitHub
+    local latest_version=$(curl -s $repo_url | grep -Po '"tag_name": "\K[^"]+')
+
+    # Compare the versions
+    if [[ $latest_version > $tool_version ]]; then
+        echo "A new update is available! Updating the tool..." | lolcat
+
+        # The Target Location
+        target_location="/usr/bin"
+
+        # Download the latest release
+        local download_url=$(curl -s $repo_url | grep -Po '"browser_download_url": "\K[^"]+')
+        wget -O /tmp/Kali-Manager $download_url
+
+        # Install the latest version
+        sudo mv /tmp/Kali-Manager $target_location
+
+        echo "Update completed successfully!" | lolcat
+        read -p "Do you want to restart the tool?" tmp
+
+        # Restarts the tool
+        Kali-Manager
+    else
+        echo "You are already using the latest version." | lolcat
+    fi
+}
+
+# Display the title
+echo "██╗  ██╗ █████╗ ██╗     ██╗    ███╗   ███╗ █████╗ ███╗   ██╗ █████╗  ██████╗ ███████╗██████╗ 
+██║ ██╔╝██╔══██╗██║     ██║    ████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝ ██╔════╝██╔══██╗
+█████╔╝ ███████║██║     ██║    ██╔████╔██║███████║██╔██╗ ██║███████║██║  ███╗█████╗  ██████╔╝
+██╔═██╗ ██╔══██║██║     ██║    ██║╚██╔╝██║██╔══██║██║╚██╗██║██╔══██║██║   ██║██╔══╝  ██╔══██╗
+██║  ██╗██║  ██║███████╗██║    ██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║╚██████╔╝███████╗██║  ██║
+╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝" | lolcat
+echo
+echo -e "\e[36mTool created by \e[31mUnknowner\e[36m github account \e[31mUnknowner334\e[0m"
+echo -e "Tools Version: \e[32mv$tool_version\e[0m"
+if [[ $USER == "root" ]]; then
+echo -e "\e[33mWelcome \e[31m$USER\e[33m to the Kali Manager\e[0m"
+else
+echo -e "\e[33mWelcome \e[36m$USER\e[33m to the Kali Manager\e[0m"
+fi
+echo -e "\e[33mHere you can manage Kali Linux\e[0m"
+echo
+
+# Display menu options
+while true; do
+    echo "Select an Option:" | lolcat
+    echo -e "\e[36m[1]. \e[0mFull Upgrade Kali Linux      \e[36m[2]. \e[0mUpgrade Kali Linux          \e[36m[3]. \e[0mUpdate Kali Linux"
+    echo -e "\e[36m[4]. \e[0mInstall a Package/Packages   \e[36m[5]. \e[0mRemove a Package/Packages   \e[36m[6]. \e[0mAuto Remove Packages (apt)"
+    echo -e "\e[36m[7]. \e[0mList Installed Packages      \e[36m[8]. \e[0mShow All the WIFI Devices   \e[36m[9]. \e[0mMatrix"
+    echo -e "\e[36m[0]. \e[0mExit                         \e[36m[99]. \e[0mCheck For Updates"
+    echo -e "\e[31m[*]. \e[0m"
+    echo -e "\e[31m[*]. \e[0mThere is a bug in choice 7 (List Installed Packages)"
+    echo -e "\e[31m[*]. \e[0mA lot of other functions will be added soon!"
+    echo -e "\e[31m[*]. \e[33mWarning the version Green Color Does not mean that the tool is in the latest version!\e[0m"
+    echo
+    read -p "Enter your choice (0-9): " choice
+
+    # Checking if choice are correct and execute a choice
+    case $choice in
+        1)
+            echo "Fully Upgrading Kali Linux..." | lolcat
+            sudo apt update && sudo apt full-upgrade -y
+            echo "Full Upgrading is done!" | lolcat
+            ;;
+        2)
+            echo "Upgrading Kali Linux..." | lolcat
+            sudo apt update && sudo apt full-upgrade -y
+            echo "Upgrading is done!" | lolcat
+            ;;
+        3)
+            echo "Updating Kali Linux..." | lolcat
+            sudo apt update
+            echo "Updating is done!" | lolcat
+            ;;
+        4)
+            echo "Installing Package/Packages..." | lolcat
+            read -p "Choose a package or some packages to Install: " packages
+            sudo apt install -y $packages
+            echo "Installing Package/Packages is done!" | lolcat
+            ;;
+        5)
+            echo "Removing Package/Packages..." | lolcat
+            read -p "Choose a package or some packages to Remove: " packages
+            sudo apt remove -y $packages
+            echo "Removing Package/Packages is done!" | lolcat
+            ;;
+        6)
+            echo "Auto Removing Packages (apt)..." | lolcat
+            sudo apt -y autoremove
+            echo "Auto Removing Packages (apt) is done!" | lolcat
+            ;;
+        7)
+            echo "Listing all installed packages" | lolcat
+            sudo apt list
+            echo "Listing all installed packages is done!" | lolcat
+            ;;
+        8)
+            echo "This Feature it's not ready right now" | lolcat
+            ;;
+        9)
+            echo "Are you ready (use Ctrl+C to exit)" | lolcat
+            read -p "To Start [Y,n]: " ready
+            ready=${ready:-Y}
+            if [[ $ready == 'Y' || $ready == 'y' ]]
+            then
+            cmatrix
+            elif [[ $ready == 'N' || $ready == 'n' ]]
+            then
+            echo "Exiting" | lolcat
+            exit 0
+            else
+            echo "Invalid input. Please enter Y/y for yes or N/n for no."
+            fi
+            ;;
+        99)
+            check_for_updates
+            ;;
+        0)
+            echo "Exiting Kali Manager. Goodbye!" | lolcat
+            break
+            ;;
+        *)
+            echo "Invalid choice. Please enter a number between 1 and 10." | lolcat
+            ;;
+    esac
+    read -p "Press Enter to return to the menu..." temp
+    clear
+    echo "██╗  ██╗ █████╗ ██╗     ██╗    ███╗   ███╗ █████╗ ███╗   ██╗ █████╗  ██████╗ ███████╗██████╗ 
+██║ ██╔╝██╔══██╗██║     ██║    ████╗ ████║██╔══██╗████╗  ██║██╔══██╗██╔════╝ ██╔════╝██╔══██╗
+█████╔╝ ███████║██║     ██║    ██╔████╔██║███████║██╔██╗ ██║███████║██║  ███╗█████╗  ██████╔╝
+██╔═██╗ ██╔══██║██║     ██║    ██║╚██╔╝██║██╔══██║██║╚██╗██║██╔══██║██║   ██║██╔══╝  ██╔══██╗
+██║  ██╗██║  ██║███████╗██║    ██║ ╚═╝ ██║██║  ██║██║ ╚████║██║  ██║╚██████╔╝███████╗██║  ██║
+╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝" | lolcat
+    echo
+    echo -e "\e[34mTool created by \e[31mUnknowner\e[34m github account \e[31mUnknowner334\e[0m"
+    echo -e "\e[34mv0.0.1\e[0m"
+    if [[ $USER == "root" ]]; then
+    echo -e "\e[33mWelcome \e[31m$USER\e[33m to the Kali Manager\e[0m"
+    else
+    echo -e "\e[33mWelcome \e[34m$USER\e[33m to the Kali Manager\e[0m"
+    fi
+    echo -e "\e[33mHere you can manage Kali Linux\e[0m"
+    echo
+done
