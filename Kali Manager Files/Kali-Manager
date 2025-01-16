@@ -114,7 +114,15 @@ while true; do
             echo "Listing all installed packages is done!" | lolcat
             ;;
         8)
-            echo "This Feature it's not ready right now" | lolcat
+            echo "Scanning for Wi-Fi adapters" | lolcat
+            adapters=$(iw dev | grep Interface | awk '{print $2}')
+            if [[ -z $adapters ]] 
+            then
+            echo "No Wi-Fi adapters found." | lolcat
+            else
+            echo "Available Wi-Fi adapters:" | lolcat
+            echo "$adapters" | nl -w2 -s'. '
+            fi
             ;;
         9)
             echo "Are you ready (use Ctrl+C to exit)" | lolcat
