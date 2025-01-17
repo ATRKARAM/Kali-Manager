@@ -1,5 +1,9 @@
 *Warning it's only for kali it might work for other linux distro but is NOT RECOMMENDED*
 
+*Warning the tool is archieved*
+*I allow you to take the tool and complete the development on it*
+*Because I stopped on it*
+
 *Also thats my first tool ever!*
 
 *I know it might be so basic but we all started somewhere*
